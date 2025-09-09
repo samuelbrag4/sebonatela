@@ -1,0 +1,210 @@
+/* Sessão principal */
+.mainSection {
+    flex: 1;
+    padding: 20px;
+    background-color: #fffff8; /* Fundo branco quase puro */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    overflow-y: auto; /* Permite rolagem se o conteúdo for maior que a tela */
+  }
+  
+  /* Barra de pesquisa */
+  .searchBar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #cbb7aa; /* Fundo bege claro */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .searchInput {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #b19282; /* Borda bege médio */
+    border-radius: 5px;
+    font-size: 16px;
+    color: #976e5b; /* Texto marrom claro */
+    background-color: #fffff8; /* Fundo branco quase puro */
+  }
+  
+  .searchInput::placeholder {
+    color: #b19282; /* Placeholder em bege médio */
+  }
+  
+  .searchButton {
+    padding: 10px 15px;
+    background-color: #976e5b; /* Fundo marrom claro */
+    color: #fffff8; /* Texto branco quase puro */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .searchButton:hover {
+    background-color: #b19282; /* Fundo bege médio no hover */
+  }
+  
+  /* Título e subtítulo */
+  .header {
+    text-align: center;
+  }
+  
+  .pageTitle {
+    font-size: 36px;
+    color: #976e5b; /* Marrom claro */
+    margin-bottom: 10px;
+  }
+  
+  .pageSubtitle {
+    font-size: 18px;
+    color: #b19282; /* Bege médio */
+  }
+  
+  /* Listagem de categorias */
+  .categories {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .categoryButton {
+    padding: 10px 20px;
+    background-color: #cbb7aa; /* Fundo bege claro */
+    color: #976e5b; /* Texto marrom claro */
+    border: 2px solid #b19282; /* Borda bege médio */
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .categoryButton:hover {
+    background-color: #b19282; /* Fundo bege médio no hover */
+    transform: scale(1.05); /* Leve aumento no hover */
+  }
+  
+  /* Livros populares */
+  .popularBooks {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .sectionTitle {
+    font-size: 24px;
+    color: #976e5b; /* Marrom claro */
+    text-align: center;
+  }
+  
+  .booksContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .arrowButton {
+    background-color: #cbb7aa; /* Fundo bege claro */
+    color: #976e5b; /* Texto marrom claro */
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .arrowButton:hover {
+    background-color: #b19282; /* Fundo bege médio no hover */
+    transform: scale(1.1); /* Leve aumento no hover */
+  }
+  
+  .booksList {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto; /* Permite rolagem horizontal */
+    padding: 10px;
+  }
+  
+  .bookCard {
+    background-color: #fffff8; /* Fundo branco quase puro */
+    border: 2px solid #cbb7aa; /* Borda bege claro */
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 150px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .bookCard:hover {
+    transform: scale(1.05); /* Leve aumento no hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .bookImage {
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .bookTitle {
+    font-size: 16px;
+    color: #976e5b; /* Marrom claro */
+    margin-bottom: 5px;
+  }
+  
+  .bookPrice {
+    font-size: 14px;
+    color: #b19282; /* Bege médio */
+    margin-bottom: 10px;
+  }
+  
+  .favoriteButton,
+  .cartButton {
+    background-color: #cbb7aa; /* Fundo bege claro */
+    color: #976e5b; /* Texto marrom claro */
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .favoriteButton:hover,
+  .cartButton:hover {
+    background-color: #b19282; /* Fundo bege médio no hover */
+  }
+  
+  /* Sessão adicional */
+  .additionalSection {
+    text-align: center;
+    padding: 20px;
+    background-color: #e5dbd1; /* Fundo bege muito claro */
+    border-radius: 8px;
+  }
+  
+  .sectionContent {
+    font-size: 16px;
+    color: #976e5b; /* Marrom claro */
+  }
+  
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #cbb7aa; /* Fundo bege claro */
+    color: #976e5b; /* Texto marrom claro */
+    border-top: 2px solid #b19282; /* Borda bege médio */
+  }
+  
+  .footerText {
+    font-size: 14px;
+  }
