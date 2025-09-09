@@ -1,0 +1,110 @@
+.searchBar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #ffffff; /* Fundo branco */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto; /* Centraliza a barra */
+  }
+  
+  .searchContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .searchInput {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .searchInput:focus {
+    border-color: #0070f3; /* Azul no foco */
+  }
+  
+  .searchButton {
+    padding: 12px 20px;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .searchButton:hover {
+    background-color: #005bb5;
+  }
+  
+  .categoriesDropdown {
+    position: relative;
+  }
+  
+  .dropdownButton {
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  
+  .dropdownButton:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .dropdownMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 200px; /* Limita a altura */
+    overflow-y: auto; /* Adiciona rolagem */
+    z-index: 10;
+  }
+  
+  .dropdownItem {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdownItem:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .sortContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .sortSelect {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+  }

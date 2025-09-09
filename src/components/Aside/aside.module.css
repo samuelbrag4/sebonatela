@@ -2,7 +2,7 @@
 .asideContainer {
     background-color: #976e5b; /* Fundo marrom claro */
     width: 15%; /* Largura do aside */
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

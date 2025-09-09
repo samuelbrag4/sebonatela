@@ -1,72 +1,87 @@
-import React from 'react';
-import Image from 'next/image';
-import styles from './mainSection.module.css'; // Corrigindo o CSS importado
+"use client";
 
-export default function MainSection() { // Nome corrigido
+import React, { useState } from "react";
+import SearchBar from "../SearchBar";
+import BookList from "../BookList";
+import styles from "./mainSection.module.css";
+
+export default function MainSection() {
+  const [books, setBooks] = useState([]); // Estado para armazenar os livros
+  const [currentPage, setCurrentPage] = useState(1); // Página atual
+  const [totalPages, setTotalPages] = useState(1); // Total de páginas
+  const [query, setQuery] = useState(""); // Estado para armazenar a query de busca
+
+  const fetchBooks = async (query, page = 1) => {
+    const maxResults = 15; // Exibir 15 livros por página
+    const startIndex = (page - 1) * maxResults;
+
+    try {
+      const response = await fetch(
+        `https://www.googleapis.com/books/v1/volumes?q=${query}&startIndex=${startIndex}&maxResults=${maxResults}`
+      );
+      const data = await response.json();
+
+      setBooks(data.items || []);
+      setTotalPages(Math.ceil((data.totalItems || 0) / maxResults));
+    } catch (error) {
+      console.error("Erro ao buscar livros:", error);
+    }
+  };
+
+  const handleSearch = (searchQuery) => {
+    setQuery(searchQuery); // Atualiza o estado com a nova query
+    setCurrentPage(1);
+    fetchBooks(searchQuery);
+  };
+
+  const handleCategorySelect = (category) => {
+    setQuery(category); // Atualiza o estado com a categoria selecionada
+    setCurrentPage(1);
+    fetchBooks(category);
+  };
+
+  const handleSort = (order) => {
+    const sortedBooks = [...books].sort((a, b) => {
+      const titleA = a.volumeInfo.title.toLowerCase();
+      const titleB = b.volumeInfo.title.toLowerCase();
+
+      if (order === "asc") {
+        return titleA.localeCompare(titleB);
+      } else {
+        return titleB.localeCompare(titleA);
+      }
+    });
+
+    setBooks(sortedBooks);
+  };
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+    fetchBooks(query, newPage); // Usa o estado `query` para buscar os livros
+  };
+
   return (
     <section className={styles.mainSection}>
-      {/* Barra de pesquisa */}
-      <div className={styles.searchBar}>
-        <input
-          type="text"
-          placeholder="Digite o título, autor ou gênero"
-          className={styles.searchInput}
-        />
-        <button className={styles.searchButton}>🔍</button>
-      </div>
-
-      {/* Título e subtítulo */}
       <header className={styles.header}>
         <h1 className={styles.pageTitle}>Sebo na Tela</h1>
-        <p className={styles.pageSubtitle}>Uma plataforma para amantes de livros</p>
+        <p className={styles.pageSubtitle}>
+          Uma plataforma para amantes de livros
+        </p>
       </header>
 
-      {/* Listagem de categorias */}
-      <nav className={styles.categories}>
-        <button className={styles.categoryButton}>Ficção</button>
-        <button className={styles.categoryButton}>Romance</button>
-        <button className={styles.categoryButton}>Terror</button>
-        <button className={styles.categoryButton}>Fantasia</button>
-        <button className={styles.categoryButton}>História</button>
-        <button className={styles.categoryButton}>Biografia</button>
-      </nav>
+      <SearchBar
+        onSearch={handleSearch}
+        onCategorySelect={handleCategorySelect}
+        onSort={handleSort}
+      />
 
-      {/* Listagem de livros populares */}
-      <section className={styles.popularBooks}>
-        <h2 className={styles.sectionTitle}>Livros Populares</h2>
-        <div className={styles.booksContainer}>
-          <button className={styles.arrowButton}>{'<'}</button>
-          <div className={styles.booksList}>
-            {/* Card de livro */}
-            <div className={styles.bookCard}>
-              <Image
-                src="/images/livro1.jpg"
-                alt="Livro 1"
-                width={100}
-                height={150}
-                className={styles.bookImage}
-              />
-              <h3 className={styles.bookTitle}>Título do Livro</h3>
-              <p className={styles.bookPrice}>R$ 29,90</p>
-              <button className={styles.favoriteButton}>❤️</button>
-              <button className={styles.cartButton}>🛒</button>
-            </div>
-            {/* Adicione mais cards conforme necessário */}
-          </div>
-          <button className={styles.arrowButton}>{'>'}</button>
-        </div>
-      </section>
-
-      {/* Sessão adicional */}
-      <section className={styles.additionalSection}>
-        <h2 className={styles.sectionTitle}>Outra Sessão</h2>
-        <p className={styles.sectionContent}>Conteúdo a ser definido.</p>
-      </section>
-
-      {/* Footer */}
-      <footer className={styles.footer}>
-        <p className={styles.footerText}>Footer - Estilizar depois</p>
-      </footer>
+      {/* Usando o componente BookList */}
+      <BookList
+        books={books}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+        totalPages={totalPages}
+      />
     </section>
   );
 }
