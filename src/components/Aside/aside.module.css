@@ -1,0 +1,78 @@
+/* Estilos do Aside */
+.asideContainer {
+    background-color: #976e5b; /* Fundo marrom claro */
+    width: 15%; /* Largura do aside */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    box-shadow: 4px 0 5px rgba(0, 0, 0, 0.1); /* Sombra para destacar o aside */
+    border-right: 3px solid #b19282; /* Borda bege médio */
+  }
+  
+  .profileContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 50px;
+  }
+  
+  .profileImage {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar a imagem */
+    border: 3px solid #cbb7aa; /* Destaque bege claro */
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .profileImage:hover {
+    transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+    border-color: #b19282; /* Cor de hover */
+  }
+  
+  .greeting {
+    font-size: 18px;
+    color: #fffff8; /* Texto branco quase puro */
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* Navbar */
+  .navbar {
+    margin-top: 30px;
+    width: 100%;
+  }
+  
+  .navbarList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .navbarItem {
+    background-color: #cbb7aa; /* Fundo bege claro */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para destacar os itens */
+  }
+  
+  .navbarItem:hover {
+    background-color: #b19282; /* Fundo bege médio no hover */
+    transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+  }
+  
+  .navbarIcon {
+    font-size: 28px;
+    color: #976e5b; /* Ícones na cor do fundo do aside */
+  }
