@@ -1,6 +1,6 @@
 /* Estilos do Aside */
 .asideContainer {
-    background-color: #976e5b; /* Fundo marrom claro */
+    background-color: #182625; /* Fundo marrom claro */
     width: 15%; /* Largura do aside */
     height: 100%;
     display: flex;
@@ -9,7 +9,6 @@
     padding: 20px;
     gap: 20px;
     box-shadow: 4px 0 5px rgba(0, 0, 0, 0.1); /* Sombra para destacar o aside */
-    border-right: 3px solid #b19282; /* Borda bege médio */
   }
   
   .profileContainer {
@@ -26,7 +25,6 @@
     height: 100px;
     object-fit: cover;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar a imagem */
-    border: 3px solid #cbb7aa; /* Destaque bege claro */
     transition: transform 0.3s ease, border-color 0.3s ease;
   }
   
@@ -56,7 +54,7 @@
   }
   
   .navbarItem {
-    background-color: #cbb7aa; /* Fundo bege claro */
+    background-color: white; /* Fundo bege claro */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -68,11 +66,11 @@
   }
   
   .navbarItem:hover {
-    background-color: #b19282; /* Fundo bege médio no hover */
+    background-color: #3D5A73; /* Fundo bege médio no hover */
     transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
   }
   
   .navbarIcon {
     font-size: 28px;
-    color: #976e5b; /* Ícones na cor do fundo do aside */
+    color: #2F3D40; /* Ícones na cor do fundo do aside */
   }

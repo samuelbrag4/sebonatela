@@ -6,7 +6,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
     gap: 30px;
     overflow-y: auto;
   }
@@ -17,29 +16,37 @@
   }
   
   .pageTitle {
-    font-size: 36px;
-    color: #976e5b; /* Marrom claro */
+    font-size: 64px;
+    color: #28403D; 
     margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .lineTitle {
+    width: 240px;
+    height: 4px;
+    background-color: #182625; /* Cor bege médio */
+    border: none;
+    margin: 0 auto 20px auto; /* Centraliza e adiciona margem inferior */
+    border-radius: 2px;
+    box-shadow: 2PX 4px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
   }
   
   .pageSubtitle {
-    font-size: 18px;
-    color: #b19282; /* Bege médio */
+    font-size: 32px;
+    color: #455559; /* Bege médio */
   }
   
   /* Listagem de categorias */
   .categories {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 50px;
   }
   
   .categoryButton {
     padding: 10px 20px;
-    background-color: #cbb7aa; /* Fundo bege claro */
-    color: #976e5b; /* Texto marrom claro */
-    border: 2px solid #b19282; /* Borda bege médio */
-    border-radius: 5px;
+    border-radius: 50px;
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;

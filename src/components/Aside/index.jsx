@@ -27,7 +27,7 @@ export default function Aside() {
             </a>
           </li>
           <li className={styles.navbarItem}>
-            <a href="/listagem" className={styles.navbarLink}>
+            <a href="/livros" className={styles.navbarLink}>
               <FaBook className={styles.navbarIcon} aria-label="Livro" />
             </a>
           </li>
@@ -39,11 +39,6 @@ export default function Aside() {
           <li className={styles.navbarItem}>
             <a href="/sobre" className={styles.navbarLink}>
               <FaInfoCircle className={styles.navbarIcon} aria-label="Exclamação" />
-            </a>
-          </li>
-          <li className={styles.navbarItem}>
-            <a href="/carrinho" className={styles.navbarLink}>
-              <FaShoppingCart className={styles.navbarIcon} aria-label="Carrinho" />
             </a>
           </li>
         </ul>

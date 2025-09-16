@@ -65,10 +65,11 @@ export default function SearchBar({ onSearch, onCategorySelect, onSort }) {
           onChange={(e) => setQuery(e.target.value)} // Atualiza o estado com o valor do input
         />
         <button className={styles.searchButton} onClick={handleSearch}>
-          🔍 Buscar
+          Buscar
         </button>
       </div>
 
+      <div className={styles.optionsContainer}>
       <div className={styles.categoriesDropdown}>
         <button
           className={styles.dropdownButton}
@@ -92,7 +93,7 @@ export default function SearchBar({ onSearch, onCategorySelect, onSort }) {
       </div>
 
       <div className={styles.sortContainer}>
-        <label htmlFor="sort">Ordenar:</label>
+        <label htmlFor="sort" className={styles.order}>Ordenar:</label>
         <select
           id="sort"
           className={styles.sortSelect}
@@ -101,6 +102,7 @@ export default function SearchBar({ onSearch, onCategorySelect, onSort }) {
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
         </select>
+      </div>
       </div>
     </div>
   );

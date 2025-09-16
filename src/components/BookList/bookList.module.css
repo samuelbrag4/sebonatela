@@ -1,123 +1,148 @@
 /* Container principal do BookList */
 .bookList {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-  }
-  
-  /* Container dos livros */
-  .booksContainer {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 livros por linha */
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  /* Estilo do card */
-  .bookCard {
-    width: 240px;
-    height: 460px;
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: default;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .bookCard:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .bookImage {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 4px;
-    margin-bottom: 8px;
-  }
-  
-  .bookTitle {
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 4px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  .bookAuthor {
-    font-size: 12px;
-    color: #666;
-    margin-bottom: 8px;
-  }
-  
-  /* Botão de favoritar */
-  .favoriteButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    background-color: #ff6b6b; /* Vermelho claro */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .favoriteButton:hover {
-    background-color: #ff4c4c; /* Vermelho mais escuro no hover */
-  }
-  
-  /* Botão "Ver mais" */
-  .viewMoreButton {
-    padding: 8px 12px;
-    background-color: #0070f3;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .viewMoreButton:hover {
-    background-color: #005bb5;
-  }
-  
-  /* Paginação */
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .arrowButton {
-    padding: 8px 16px;
-    background-color: #0070f3;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .arrowButton:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .arrowButton:hover:not(:disabled) {
-    transform: scale(1.1);
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Container dos livros */
+.booksContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsivo */
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Estilo do card */
+.bookCard {
+  width: 100%;
+  max-width: 300px;
+  height: 500px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: default;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bookCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Header do card (imagem + ícone de favorito) */
+.cardHeader {
+  position: relative;
+}
+
+.bookImage {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.favoriteIcon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.favoriteIcon.favoriteActive {
+  color: #ff4c4c;
+}
+
+.favoriteIcon:hover {
+  color: #ff6b6b;
+}
+
+/* Título do livro */
+.bookTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: #182625;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Autor do livro */
+.bookAuthor {
+  font-size: 16px;
+  font-weight: bold;
+  color: #455559;
+  margin-bottom: 8px;
+}
+
+/* Ano de lançamento */
+.bookYear {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+/* Separador estilizado */
+.separator {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 10px 0;
+}
+
+/* Botão "Ver mais" */
+.viewMoreButton {
+  padding: 8px 12px;
+  background-color: #3D5A73;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.viewMoreButton:hover {
+  background-color: #28403D;
+  transform: scale(1.05);
+}
+
+/* Paginação */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.arrowButton {
+  padding: 10px 20px;
+  background-color: #3D5A73;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.arrowButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.arrowButton:hover:not(:disabled) {
+  background-color: #28403D;
+  transform: scale(1.1);
+}
