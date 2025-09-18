@@ -9,9 +9,9 @@
 /* Container dos livros */
 .booksContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsivo */
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
-  justify-content: center;
+  justify-items: center;
 }
 
 /* Estilo do card */
