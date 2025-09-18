@@ -6,6 +6,7 @@ import styles from "./searchBar.module.css";
 export default function SearchBar({ onSearch, onCategorySelect, onSort }) {
   const [query, setQuery] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null); // NOVO
 
   const categories = [
     "Administração, Negócios e Economia",
@@ -19,7 +20,6 @@ export default function SearchBar({ onSearch, onCategorySelect, onSort }) {
     "Direito",
     "Educação, Referência e Didáticos",
     "Engenharia e Transporte",
-    "Erótico",
     "Esportes e Lazer",
     "Fantasia, Horror e Ficção Científica",
     "Gastronomia e Culinária",
@@ -41,17 +41,18 @@ export default function SearchBar({ onSearch, onCategorySelect, onSort }) {
 
   const handleSearch = () => {
     if (query.trim() !== "") {
-      onSearch(query); // Chama a função passada como prop para realizar a busca
+      onSearch(query);
     }
   };
 
   const handleCategoryClick = (category) => {
-    onCategorySelect(category); // Chama a função passada como prop para buscar pela categoria
-    setIsDropdownOpen(false); // Fecha o dropdown
+    setSelectedCategory(category); // NOVO
+    onCategorySelect(category);
+    setIsDropdownOpen(false);
   };
 
   const handleSortChange = (event) => {
-    onSort(event.target.value); // Chama a função passada como prop para ordenar os livros
+    onSort(event.target.value);
   };
 
   return (
@@ -62,47 +63,58 @@ export default function SearchBar({ onSearch, onCategorySelect, onSort }) {
           placeholder="Digite o título, autor ou gênero"
           className={styles.searchInput}
           value={query}
-          onChange={(e) => setQuery(e.target.value)} // Atualiza o estado com o valor do input
+          onChange={(e) => setQuery(e.target.value)}
         />
         <button className={styles.searchButton} onClick={handleSearch}>
           Buscar
         </button>
       </div>
 
-      <div className={styles.optionsContainer}>
-      <div className={styles.categoriesDropdown}>
-        <button
-          className={styles.dropdownButton}
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+      {/* Destaque da categoria selecionada */}
+      <div className={styles.selectedCategoryContainer}>
+        <span
+          className={`${styles.selectedCategory} ${
+            selectedCategory ? styles.selectedCategoryActive : ""
+          }`}
         >
-          Categorias
-        </button>
-        {isDropdownOpen && (
-          <div className={styles.dropdownMenu}>
-            {categories.map((category) => (
-              <div
-                key={category}
-                className={styles.dropdownItem}
-                onClick={() => handleCategoryClick(category)}
-              >
-                {category}
-              </div>
-            ))}
-          </div>
-        )}
+          Categoria: {selectedCategory || "Nenhuma"}
+        </span>
       </div>
 
-      <div className={styles.sortContainer}>
-        <label htmlFor="sort" className={styles.order}>Ordenar:</label>
-        <select
-          id="sort"
-          className={styles.sortSelect}
-          onChange={handleSortChange}
-        >
-          <option value="asc">A-Z</option>
-          <option value="desc">Z-A</option>
-        </select>
-      </div>
+      <div className={styles.optionsContainer}>
+        <div className={styles.categoriesDropdown}>
+          <button
+            className={styles.dropdownButton}
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          >
+            Categorias
+          </button>
+          {isDropdownOpen && (
+            <div className={styles.dropdownMenu}>
+              {categories.map((category) => (
+                <div
+                  key={category}
+                  className={styles.dropdownItem}
+                  onClick={() => handleCategoryClick(category)}
+                >
+                  {category}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className={styles.sortContainer}>
+          <label htmlFor="sort" className={styles.order}>Ordenar:</label>
+          <select
+            id="sort"
+            className={styles.sortSelect}
+            onChange={handleSortChange}
+          >
+            <option value="asc">A-Z</option>
+            <option value="desc">Z-A</option>
+          </select>
+        </div>
       </div>
     </div>
   );
