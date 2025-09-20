@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { FaHeart } from 'react-icons/fa'; // Ícone de coração
+import { useFavorites } from '@/contexts/FavoritesContext';
 import styles from './bookList.module.css';
 
 export default function BookList({ books, onPageChange, currentPage, totalPages }) {
   const [selectedBook, setSelectedBook] = useState(null);
-  const [favorites, setFavorites] = useState([]);
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   const handleOpenPopup = (book) => {
     setSelectedBook(book);
@@ -15,12 +16,8 @@ export default function BookList({ books, onPageChange, currentPage, totalPages 
     setSelectedBook(null);
   };
 
-  const toggleFavorite = (bookId) => {
-    setFavorites((prevFavorites) =>
-      prevFavorites.includes(bookId)
-        ? prevFavorites.filter((id) => id !== bookId)
-        : [...prevFavorites, bookId]
-    );
+  const handleToggleFavorite = (book) => {
+    toggleFavorite(book);
   };
 
   // Função para truncar o título do livro
@@ -57,9 +54,9 @@ export default function BookList({ books, onPageChange, currentPage, totalPages 
               />
               <FaHeart
                 className={`${styles.favoriteIcon} ${
-                  favorites.includes(book.id) ? styles.favoriteActive : ''
+                  isFavorite(book.id) ? styles.favoriteActive : ''
                 }`}
-                onClick={() => toggleFavorite(book.id)}
+                onClick={() => handleToggleFavorite(book)}
               />
             </div>
             <h3 className={styles.bookTitle} title={book.volumeInfo.title}>

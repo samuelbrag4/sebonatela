@@ -6,15 +6,21 @@ import styles from './page.module.css';
 import { FaCog, FaBook, FaHeart, FaInfoCircle, FaShoppingCart } from 'react-icons/fa';
 import Aside from '@/components/Aside';
 import MainSection from '@/components/MainSection';
+import Footer from '@/components/Footer';
 
 export default function Page() {
   return (
-    <main className={styles.mainContainer}>
-      {/* Aside */}
-      <Aside />
+    <div className={styles.pageWrapper}>
+      <main className={styles.mainContainer}>
+        {/* Aside */}
+        <Aside />
 
-      {/* Sessão principal */}
-      <MainSection />
-    </main>
+        {/* Sessão principal */}
+        <MainSection />
+      </main>
+      
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 }

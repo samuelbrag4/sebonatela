@@ -1,7 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './aside.module.css';
-import { FaCog, FaBook, FaHeart, FaInfoCircle, FaShoppingCart } from 'react-icons/fa';
+import { FaHome, FaBook, FaHeart, FaInfoCircle } from 'react-icons/fa';
 
 export default function Aside() {
   return (
@@ -22,24 +23,28 @@ export default function Aside() {
       <nav className={styles.navbar}>
         <ul className={styles.navbarList}>
           <li className={styles.navbarItem}>
-            <a href="/api" className={styles.navbarLink}>
-              <FaCog className={styles.navbarIcon} aria-label="Engrenagem" />
-            </a>
+            <Link href="/" className={styles.navbarLink}>
+              <FaHome className={styles.navbarIcon} />
+              <span className={styles.navbarText}>Home</span>
+            </Link>
           </li>
           <li className={styles.navbarItem}>
-            <a href="/livros" className={styles.navbarLink}>
-              <FaBook className={styles.navbarIcon} aria-label="Livro" />
-            </a>
+            <Link href="/livros" className={styles.navbarLink}>
+              <FaBook className={styles.navbarIcon} />
+              <span className={styles.navbarText}>Livros</span>
+            </Link>
           </li>
           <li className={styles.navbarItem}>
-            <a href="/favoritos" className={styles.navbarLink}>
-              <FaHeart className={styles.navbarIcon} aria-label="Coração" />
-            </a>
+            <Link href="/favoritos" className={styles.navbarLink}>
+              <FaHeart className={styles.navbarIcon} />
+              <span className={styles.navbarText}>Favoritos</span>
+            </Link>
           </li>
           <li className={styles.navbarItem}>
-            <a href="/sobre" className={styles.navbarLink}>
-              <FaInfoCircle className={styles.navbarIcon} aria-label="Exclamação" />
-            </a>
+            <Link href="/apiInfo" className={styles.navbarLink}>
+              <FaInfoCircle className={styles.navbarIcon} />
+              <span className={styles.navbarText}>API Info</span>
+            </Link>
           </li>
         </ul>
       </nav>

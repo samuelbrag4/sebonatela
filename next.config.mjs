@@ -9,6 +9,19 @@ const nextConfig = {
         },
       ],
     },
+    webpack: (config, { isServer }) => {
+      if (!isServer) {
+        config.resolve.fallback = {
+          ...config.resolve.fallback,
+          fs: false,
+        };
+      }
+      
+      // Resolver conflitos de case-sensitivity
+      config.resolve.cacheWithContext = false;
+      
+      return config;
+    }
   };
   
   export default nextConfig;

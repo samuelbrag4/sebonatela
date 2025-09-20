@@ -1,4 +1,5 @@
 import "./globals.css";
+import { FavoritesProvider } from '@/contexts/FavoritesContext';
 
 export const metadata = {
     title: "Sebo na Tela",
@@ -10,8 +11,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <html>
-            <body>{children}</body>
+        <html lang="pt-BR">
+            <body suppressHydrationWarning={true}>
+                <FavoritesProvider>
+                    {children}
+                </FavoritesProvider>
+            </body>
         </html>
     );
 }
