@@ -1,12 +1,14 @@
+'use client';
+
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { FaHeart } from 'react-icons/fa'; // Ícone de coração
-import { useFavorites } from '@/contexts/FavoritesContext';
+import { FaHeart, FaBookOpen, FaCheck } from 'react-icons/fa'; // Ícones
+import { useBooks } from '@/contexts/FavoritesContext';
 import styles from './bookList.module.css';
 
 export default function BookList({ books, onPageChange, currentPage, totalPages }) {
   const [selectedBook, setSelectedBook] = useState(null);
-  const { toggleFavorite, isFavorite } = useFavorites();
+  const { toggleFavorite, isFavorite, toggleReadStatus, isRead } = useBooks();
 
   const handleOpenPopup = (book) => {
     setSelectedBook(book);
@@ -18,6 +20,10 @@ export default function BookList({ books, onPageChange, currentPage, totalPages 
 
   const handleToggleFavorite = (book) => {
     toggleFavorite(book);
+  };
+
+  const handleToggleReadStatus = (book) => {
+    toggleReadStatus(book);
   };
 
   // Função para truncar o título do livro
@@ -52,12 +58,24 @@ export default function BookList({ books, onPageChange, currentPage, totalPages 
                 height={180}
                 className={styles.bookImage}
               />
-              <FaHeart
-                className={`${styles.favoriteIcon} ${
-                  isFavorite(book.id) ? styles.favoriteActive : ''
-                }`}
-                onClick={() => handleToggleFavorite(book)}
-              />
+              <div className={styles.actionButtons}>
+                <FaHeart
+                  className={`${styles.favoriteIcon} ${
+                    isFavorite(book.id) ? styles.favoriteActive : ''
+                  }`}
+                  onClick={() => handleToggleFavorite(book)}
+                  title={isFavorite(book.id) ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
+                />
+                <div 
+                  className={`${styles.readIcon} ${
+                    isRead(book.id) ? styles.readActive : ''
+                  }`}
+                  onClick={() => handleToggleReadStatus(book)}
+                  title={isRead(book.id) ? 'Marcar como não lido' : 'Marcar como lido'}
+                >
+                  {isRead(book.id) ? <FaCheck /> : <FaBookOpen />}
+                </div>
+              </div>
             </div>
             <h3 className={styles.bookTitle} title={book.volumeInfo.title}>
               {truncateTitle(book.volumeInfo.title)}

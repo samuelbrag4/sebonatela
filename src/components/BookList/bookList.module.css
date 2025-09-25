@@ -36,7 +36,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Header do card (imagem + ícone de favorito) */
+/* Header do card (imagem + ícones de ação) */
 .cardHeader {
   position: relative;
 }
@@ -50,22 +50,61 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.favoriteIcon {
+.actionButtons {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 24px;
-  color: #ccc;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.favoriteIcon {
+  font-size: 16px;
+  color: white;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: all 0.2s ease;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  padding: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .favoriteIcon.favoriteActive {
-  color: #ff4c4c;
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.9);
 }
 
 .favoriteIcon:hover {
-  color: #ff6b6b;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.readIcon {
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  padding: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.readIcon.readActive {
+  color: #27ae60;
+  background: rgba(39, 174, 96, 0.9);
+}
+
+.readIcon:hover {
+  background: rgba(0, 0, 0, 0.8);
 }
 
 /* Título do livro */

@@ -2,25 +2,44 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const FavoritesContext = createContext();
+const BooksContext = createContext();
 
-export const useFavorites = () => {
-  const context = useContext(FavoritesContext);
+export const useBooks = () => {
+  const context = useContext(BooksContext);
   if (!context) {
-    throw new Error('useFavorites deve ser usado dentro de FavoritesProvider');
+    throw new Error('useBooks deve ser usado dentro de BooksProvider');
   }
   return context;
 };
 
-export const FavoritesProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState([]);
+// Para compatibilidade com código existente
+export const useFavorites = () => {
+  const context = useBooks();
+  return {
+    favorites: context.favorites,
+    addToFavorites: context.addToFavorites,
+    removeFromFavorites: context.removeFromFavorites,
+    toggleFavorite: context.toggleFavorite,
+    isFavorite: context.isFavorite
+  };
+};
 
-  // Carregar favoritos do localStorage quando o componente montar
+export const BooksProvider = ({ children }) => {
+  const [favorites, setFavorites] = useState([]);
+  const [readBooks, setReadBooks] = useState([]);
+
+  // Carregar dados do localStorage quando o componente montar
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const savedFavorites = localStorage.getItem('sebonatela-favorites');
+      const savedReadBooks = localStorage.getItem('sebonatela-read-books');
+      
       if (savedFavorites) {
         setFavorites(JSON.parse(savedFavorites));
+      }
+      
+      if (savedReadBooks) {
+        setReadBooks(JSON.parse(savedReadBooks));
       }
     }
   }, []);
@@ -32,6 +51,14 @@ export const FavoritesProvider = ({ children }) => {
     }
   }, [favorites]);
 
+  // Salvar livros lidos no localStorage sempre que a lista mudar
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('sebonatela-read-books', JSON.stringify(readBooks));
+    }
+  }, [readBooks]);
+
+  // Funções para favoritos
   const addToFavorites = (book) => {
     setFavorites(prev => {
       const isAlreadyFavorite = prev.some(fav => fav.id === book.id);
@@ -59,17 +86,58 @@ export const FavoritesProvider = ({ children }) => {
     return favorites.some(fav => fav.id === bookId);
   };
 
+  // Funções para livros lidos
+  const addToReadBooks = (book) => {
+    setReadBooks(prev => {
+      const isAlreadyRead = prev.some(read => read.id === book.id);
+      if (isAlreadyRead) {
+        return prev;
+      }
+      return [...prev, { ...book, readAt: new Date().toISOString() }];
+    });
+  };
+
+  const removeFromReadBooks = (bookId) => {
+    setReadBooks(prev => prev.filter(read => read.id !== bookId));
+  };
+
+  const toggleReadStatus = (book) => {
+    const isRead = readBooks.some(read => read.id === book.id);
+    if (isRead) {
+      removeFromReadBooks(book.id);
+    } else {
+      addToReadBooks(book);
+    }
+  };
+
+  const isRead = (bookId) => {
+    return readBooks.some(read => read.id === bookId);
+  };
+
   const value = {
+    // Favoritos
     favorites,
     addToFavorites,
     removeFromFavorites,
     toggleFavorite,
-    isFavorite
+    isFavorite,
+    // Livros lidos
+    readBooks,
+    addToReadBooks,
+    removeFromReadBooks,
+    toggleReadStatus,
+    isRead,
+    // Estatísticas
+    favoritesCount: favorites.length,
+    readBooksCount: readBooks.length
   };
 
   return (
-    <FavoritesContext.Provider value={value}>
+    <BooksContext.Provider value={value}>
       {children}
-    </FavoritesContext.Provider>
+    </BooksContext.Provider>
   );
 };
+
+// Para compatibilidade com código existente
+export const FavoritesProvider = BooksProvider;

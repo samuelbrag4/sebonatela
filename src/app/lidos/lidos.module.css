@@ -1,0 +1,272 @@
+/* Layout da página */
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContainer {
+  display: flex;
+  flex: 1;
+}
+
+.mainSection {
+  flex: 1;
+  padding: 30px;
+  background: #f5f6fa;
+  overflow-y: auto;
+}
+
+/* Header da página */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.headerIcon {
+  font-size: 42px;
+  color: #27ae60;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 10px 0;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #6b7280;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Estado vazio */
+.emptyState {
+  text-align: center;
+  padding: 80px 20px;
+  color: #6b7280;
+}
+
+.emptyIcon {
+  font-size: 80px;
+  color: #d1d5db;
+  margin-bottom: 20px;
+}
+
+.emptyState h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #374151;
+}
+
+.emptyState p {
+  font-size: 16px;
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Grid dos livros */
+.booksGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Card do livro */
+.bookCard {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #e1e8ed;
+}
+
+.bookCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Container da imagem */
+.imageContainer {
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.bookImage {
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  width: 100%;
+  height: auto;
+  max-width: 150px;
+}
+
+/* Overlay com botões de ação */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 12px;
+}
+
+.imageContainer:hover .overlay {
+  opacity: 1;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.actionButton {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 18px;
+  color: #374151;
+}
+
+.actionButton:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+.favoriteButton.active {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  border: 2px solid #ef4444;
+}
+
+.removeButton:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* Informações do livro */
+.bookInfo {
+  text-align: center;
+}
+
+.bookTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bookAuthor {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 12px 0;
+  font-weight: 500;
+}
+
+.readDate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #10b981;
+  font-weight: 600;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin: 0 0 8px 0;
+}
+
+.dateIcon {
+  font-size: 12px;
+}
+
+.publishYear {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px 15px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .booksGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .bookCard {
+    padding: 20px;
+  }
+
+  .headerIcon {
+    font-size: 36px;
+  }
+
+  .emptyIcon {
+    font-size: 60px;
+  }
+
+  .emptyState h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .booksGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .actionButtons {
+    gap: 8px;
+  }
+  
+  .actionButton {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}

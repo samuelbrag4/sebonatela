@@ -1,54 +1,114 @@
-"use client";
+'use client';
 
 import React from 'react';
-import { useFavorites } from '@/contexts/FavoritesContext';
+import Image from 'next/image';
+import { useBooks } from '@/contexts/FavoritesContext';
+import { FaHeart, FaTrash, FaBookOpen } from 'react-icons/fa';
 import Aside from '@/components/Aside';
-import BookList from '@/components/BookList';
 import Footer from '@/components/Footer';
 import styles from './favoritos.module.css';
 
-export default function Page() {
-  const { favorites } = useFavorites();
+export default function FavoritosPage() {
+  const { favorites, removeFromFavorites, toggleReadStatus, isRead } = useBooks();
+
+  const handleRemoveFromFavorites = (bookId) => {
+    removeFromFavorites(bookId);
+  };
+
+  const handleToggleReadStatus = (book) => {
+    toggleReadStatus(book);
+  };
+
+  if (favorites.length === 0) {
+    return (
+      <div className={styles.pageWrapper}>
+        <main className={styles.mainContainer}>
+          <Aside />
+          <section className={styles.mainSection}>
+            <div className={styles.header}>
+              <FaHeart className={styles.headerIcon} />
+              <h1 className={styles.title}>Meus Favoritos</h1>
+            </div>
+            <div className={styles.emptyState}>
+              <FaHeart className={styles.emptyIcon} />
+              <h2>Nenhum livro favoritado ainda</h2>
+              <p>Explore nossa biblioteca e adicione livros aos seus favoritos!</p>
+            </div>
+          </section>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.pageWrapper}>
       <main className={styles.mainContainer}>
-        {/* Aside */}
         <Aside />
-
-        {/* Sessão principal */}
         <section className={styles.mainSection}>
-          <header className={styles.header}>
-            <h1 className={styles.pageTitle}>Meus Favoritos</h1>
-            <hr className={styles.lineTitle} />
-            <p className={styles.pageSubtitle}>
-              {favorites.length > 0 
-                ? `${favorites.length} livro(s) favoritado(s)`
-                : 'Nenhum livro favoritado ainda'
-              }
+          <div className={styles.header}>
+            <FaHeart className={styles.headerIcon} />
+            <h1 className={styles.title}>Meus Favoritos</h1>
+            <p className={styles.subtitle}>
+              {favorites.length} {favorites.length === 1 ? 'livro favorito' : 'livros favoritos'}
             </p>
-          </header>
+          </div>
 
-          {favorites.length > 0 ? (
-            <BookList
-              books={favorites}
-              onPageChange={() => {}} // Não precisa de paginação nos favoritos
-              currentPage={1}
-              totalPages={1}
-            />
-          ) : (
-            <div className={styles.emptyState}>
-              <div className={styles.emptyIcon}>💔</div>
-              <h3>Nenhum livro favoritado</h3>
-              <p>Que tal explorar alguns livros e adicionar aos seus favoritos?</p>
-              <a href="/livros" className={styles.exploreButton}>
-                Explorar Livros
-              </a>
-            </div>
-          )}
+          <div className={styles.booksGrid}>
+            {favorites.map((book) => (
+              <div key={book.id} className={styles.bookCard}>
+                <div className={styles.imageContainer}>
+                  <Image
+                    src={book.volumeInfo.imageLinks?.thumbnail || '/images/placeholder.jpg'}
+                    alt={book.volumeInfo.title}
+                    width={150}
+                    height={200}
+                    className={styles.bookImage}
+                  />
+                  <div className={styles.overlay}>
+                    <div className={styles.actionButtons}>
+                      <button
+                        className={`${styles.actionButton} ${styles.readButton} ${
+                          isRead(book.id) ? styles.active : ''
+                        }`}
+                        onClick={() => handleToggleReadStatus(book)}
+                        title={isRead(book.id) ? 'Marcar como não lido' : 'Marcar como lido'}
+                      >
+                        <FaBookOpen />
+                      </button>
+                      <button
+                        className={`${styles.actionButton} ${styles.removeButton}`}
+                        onClick={() => handleRemoveFromFavorites(book.id)}
+                        title="Remover dos favoritos"
+                      >
+                        <FaTrash />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className={styles.bookInfo}>
+                  <h3 className={styles.bookTitle}>{book.volumeInfo.title}</h3>
+                  <p className={styles.bookAuthor}>
+                    {book.volumeInfo.authors?.join(', ') || 'Autor desconhecido'}
+                  </p>
+                  {isRead(book.id) && (
+                    <div className={styles.readBadge}>
+                      <FaBookOpen className={styles.readIcon} />
+                      <span>Já lido</span>
+                    </div>
+                  )}
+                  {book.volumeInfo.publishedDate && (
+                    <p className={styles.publishYear}>
+                      Publicado em {book.volumeInfo.publishedDate.split('-')[0]}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
       </main>
-      
       <Footer />
     </div>
   );
