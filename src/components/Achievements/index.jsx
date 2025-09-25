@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useBooks } from '@/contexts/FavoritesContext';
 import { 
   FaTrophy, FaMedal, FaStar, FaFire, FaBookOpen, FaHeart, FaCrown, FaRocket
@@ -8,7 +8,13 @@ import {
 import styles from './achievements.module.css';
 
 export default function Achievements() {
-  const { readBooksCount, favoritesCount } = useBooks();
+  const { 
+    readBooksCount, 
+    favoritesCount, 
+    unlockAchievement, 
+    isAchievementUnlocked,
+    getAchievementUnlockDate 
+  } = useBooks();
   const [selectedCategory, setSelectedCategory] = useState('Todas');
 
   // Sistema simplificado de conquistas com ícones confiáveis
@@ -120,14 +126,40 @@ export default function Achievements() {
     }
   ];
 
+  // Verificar e desbloquear conquistas automaticamente
+  useEffect(() => {
+    achievements.forEach(achievement => {
+      if (achievement.completed && !isAchievementUnlocked(achievement.id)) {
+        unlockAchievement(achievement.id);
+        
+        // Mostrar notificação de conquista desbloqueada (opcional)
+        if (typeof window !== 'undefined' && window.Notification && Notification.permission === 'granted') {
+          new Notification(`🏆 Conquista Desbloqueada!`, {
+            body: `${achievement.title}: ${achievement.description}`,
+            icon: '/icons/favicon.ico'
+          });
+        }
+      }
+    });
+  }, [readBooksCount, favoritesCount, achievements, unlockAchievement, isAchievementUnlocked]);
+
   const categories = ['Todas', 'Marco', 'Quantidade', 'Coleção', 'Velocidade', 'Especial'];
   
+  // Mapear conquistas com dados de desbloqueio
+  const achievementsWithUnlockData = achievements.map(achievement => ({
+    ...achievement,
+    unlocked: isAchievementUnlocked(achievement.id),
+    unlockedAt: getAchievementUnlockDate(achievement.id),
+    // Manter a lógica de completed baseada nos dados atuais
+    displayAsCompleted: achievement.completed || isAchievementUnlocked(achievement.id)
+  }));
+
   const filteredAchievements = selectedCategory === 'Todas' 
-    ? achievements 
-    : achievements.filter(a => a.category === selectedCategory);
+    ? achievementsWithUnlockData 
+    : achievementsWithUnlockData.filter(a => a.category === selectedCategory);
   
-  const completedAchievements = achievements.filter(a => a.completed);
-  const nextAchievement = achievements.find(a => !a.completed);
+  const completedAchievements = achievementsWithUnlockData.filter(a => a.displayAsCompleted);
+  const nextAchievement = achievementsWithUnlockData.find(a => !a.displayAsCompleted);
 
   const getCategoryIcon = (category) => {
     const icons = {
@@ -146,7 +178,7 @@ export default function Achievements() {
         <FaTrophy className={styles.trophyIcon} />
         <h2 className={styles.sectionTitle}>🏆 Suas Conquistas</h2>
         <p className={styles.sectionSubtitle}>
-          {completedAchievements.length} de {achievements.length} conquistadas
+          {completedAchievements.length} de {achievementsWithUnlockData.length} conquistadas
         </p>
       </div>
 
@@ -199,12 +231,12 @@ export default function Achievements() {
           <div 
             key={achievement.id} 
             className={`${styles.achievementItem} ${
-              achievement.completed ? styles.completed : styles.locked
+              achievement.displayAsCompleted ? styles.completed : styles.locked
             } ${styles[achievement.rarity]}`}
           >
             <div 
               className={styles.achievementIcon} 
-              style={{ backgroundColor: achievement.completed ? achievement.color : '#bdc3c7' }}
+              style={{ backgroundColor: achievement.displayAsCompleted ? achievement.color : '#bdc3c7' }}
             >
               <achievement.icon />
             </div>
@@ -217,10 +249,15 @@ export default function Achievements() {
               
               <p className={styles.achievementDesc}>{achievement.description}</p>
               
-              {achievement.completed ? (
+              {achievement.displayAsCompleted ? (
                 <div className={styles.completedBadge}>
                   <FaMedal className={styles.medalIcon} />
-                  <span>Conquistado!</span>
+                  <span>
+                    {achievement.unlocked ? 
+                      `Conquistado em ${new Date(achievement.unlockedAt).toLocaleDateString('pt-BR')}` :
+                      'Conquistado!'
+                    }
+                  </span>
                 </div>
               ) : (
                 <div className={styles.progress}>
@@ -251,7 +288,7 @@ export default function Achievements() {
         </div>
         <div className={styles.statItem}>
           <span className={styles.statNumber}>
-            {Math.round((completedAchievements.length / achievements.length) * 100)}%
+            {Math.round((completedAchievements.length / achievementsWithUnlockData.length) * 100)}%
           </span>
           <span className={styles.statLabel}>Progresso Total</span>
         </div>
