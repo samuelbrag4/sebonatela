@@ -64,7 +64,7 @@ export default function LidosPage() {
           <div key={book.id} className={styles.bookCard}>
             <div className={styles.imageContainer}>
               <Image
-                src={book.volumeInfo.imageLinks?.thumbnail || '/images/placeholder.jpg'}
+                src={book.volumeInfo.imageLinks?.thumbnail || '/images/book-placeholder.svg'}
                 alt={book.volumeInfo.title}
                 width={150}
                 height={200}

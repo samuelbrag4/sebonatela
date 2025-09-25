@@ -7,6 +7,16 @@ const nextConfig = {
           hostname: 'books.google.com',
           pathname: '/**', // Permite todas as rotas do domínio
         },
+        {
+          protocol: 'https',
+          hostname: 'books.google.com',
+          pathname: '/**',
+        },
+        {
+          protocol: 'https',
+          hostname: 'm.media-amazon.com',
+          pathname: '/**',
+        },
       ],
     },
     webpack: (config, { isServer }) => {

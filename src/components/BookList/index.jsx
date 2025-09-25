@@ -52,7 +52,7 @@ export default function BookList({ books, onPageChange, currentPage, totalPages 
           <div key={book.id} className={styles.bookCard}>
             <div className={styles.cardHeader}>
               <Image
-                src={book.volumeInfo.imageLinks?.thumbnail || '/images/placeholder.jpg'}
+                src={book.volumeInfo.imageLinks?.thumbnail || '/images/book-placeholder.svg'}
                 alt={book.volumeInfo.title}
                 width={180}
                 height={180}
