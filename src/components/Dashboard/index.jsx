@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useBooks } from '@/contexts/FavoritesContext';
-import { FaBook, FaHeart, FaTrophy, FaFire, FaCalendarAlt, FaDice } from 'react-icons/fa';
+import { FaBook, FaHeart, FaTrophy, FaFire, FaCalendarAlt, FaRandom } from 'react-icons/fa';
 import styles from './dashboard.module.css';
 
 export default function Dashboard() {

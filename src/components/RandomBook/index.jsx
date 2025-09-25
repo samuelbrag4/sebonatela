@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useBooks } from '@/contexts/FavoritesContext';
-import { FaDice, FaHeart, FaBookOpen, FaStar, FaMagic } from 'react-icons/fa';
+import { FaRandom, FaHeart, FaBookOpen, FaStar, FaMagic } from 'react-icons/fa';
 import styles from './randomBook.module.css';
 
 export default function RandomBook() {
@@ -108,7 +108,7 @@ export default function RandomBook() {
   return (
     <div className={styles.randomBook}>
       <div className={styles.sectionHeader}>
-        <FaDice className={styles.diceIcon} />
+        <FaRandom className={styles.diceIcon} />
         <h2 className={styles.sectionTitle}>🎲 Livro da Sorte</h2>
         <p className={styles.sectionSubtitle}>
           Deixe o destino escolher sua próxima leitura!
@@ -123,12 +123,12 @@ export default function RandomBook() {
         >
           {isRolling ? (
             <>
-              <FaDice className={styles.rollingDice} />
+              <FaRandom className={styles.rollingDice} />
               Rolando o dado...
             </>
           ) : (
             <>
-              <FaDice />
+              <FaRandom />
               {currentBook ? 'Rolar Novamente' : 'Descobrir Livro'}
             </>
           )}
@@ -230,7 +230,7 @@ export default function RandomBook() {
 
         {!currentBook && !isRolling && (
           <div className={styles.emptyState}>
-            <FaDice className={styles.emptyIcon} />
+            <FaRandom className={styles.emptyIcon} />
             <p>Clique no botão acima para descobrir um livro surpresa!</p>
             <small>Cada rolagem é uma nova aventura 🌟</small>
           </div>

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useBooks } from '@/contexts/FavoritesContext';
-import { FaRobot, FaDice, FaHeart, FaBookOpen, FaRandom, FaMagic } from 'react-icons/fa';
+import { FaRobot, FaRandom, FaHeart, FaBookOpen, FaMagic } from 'react-icons/fa';
 import styles from './recommendations.module.css';
 
 export default function Recommendations() {
