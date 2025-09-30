@@ -1,53 +1,235 @@
 'use client';
 
 import React from 'react';
-import Aside from '@/components/Aside';
-import Footer from '@/components/Footer';
-import { FaBook, FaCode, FaGlobe, FaInfoCircle, FaExternalLinkAlt, FaSearch, FaFilter, FaImage } from 'react-icons/fa';
+import Link from 'next/link';
+import { 
+  FaBook, 
+  FaCode, 
+  FaGlobe, 
+  FaInfoCircle, 
+  FaExternalLinkAlt, 
+  FaSearch, 
+  FaFilter, 
+  FaImage,
+  FaHome,
+  FaPlus,
+  FaEdit,
+  FaTrash,
+  FaDatabase,
+  FaList
+} from 'react-icons/fa';
 import styles from './apiInfo.module.css';
 
 export default function Page() {
   return (
-    <div className={styles.pageWrapper}>
-      <main className={styles.mainContainer}>
-        {/* Aside */}
-        <Aside />
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+      <div className="container mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <FaInfoCircle className="text-blue-600 text-4xl" />
+            <h1 className="text-4xl font-bold text-gray-800">Documentação da API</h1>
+          </div>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Conheça a JSONPlaceholder API - A solução completa para desenvolvimento e testes
+          </p>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <FaHome /> Voltar ao Início
+          </Link>
+        </div>
 
-        {/* Sessão principal */}
-        <section className={styles.mainSection}>
-          <header className={styles.header}>
-            <h1 className={styles.pageTitle}>
-              <FaInfoCircle className={styles.titleIcon} />
-              Sobre a API
-            </h1>
-            <hr className={styles.lineTitle} />
-            <p className={styles.pageSubtitle}>
-              Conheça a tecnologia por trás do Sebo na Tela
+        {/* Grid de Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+          
+          {/* Card Principal da API */}
+          <div className="bg-white rounded-2xl shadow-xl p-8 lg:col-span-2">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="bg-blue-100 p-4 rounded-full">
+                <FaDatabase className="text-blue-600 text-2xl" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-gray-800">JSONPlaceholder API</h2>
+                <p className="text-gray-600">API REST gratuita para testes e prototipação</p>
+              </div>
+            </div>
+            
+            <p className="text-gray-700 mb-6 leading-relaxed">
+              A <strong>JSONPlaceholder</strong> é uma API REST gratuita que fornece dados fictícios 
+              para desenvolvimento e testes. Oferece endpoints completos para posts, comentários, 
+              álbuns, fotos, tarefas e usuários, suportando todas as operações CRUD (Create, Read, Update, Delete).
             </p>
-          </header>
 
-          <div className={styles.content}>
-            <div className={styles.apiCard}>
-              <div className={styles.cardHeader}>
-                <FaBook className={styles.cardIcon} />
-                <h2>Google Books API</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                  <FaGlobe className="text-green-600" />
+                  URL Base
+                </h4>
+                <code className="text-sm bg-gray-200 px-2 py-1 rounded">
+                  https://jsonplaceholder.typicode.com
+                </code>
               </div>
               
-              <div className={styles.cardBody}>
-                <p>
-                  O <strong>Sebo na Tela</strong> utiliza a Google Books API para fornecer 
-                  acesso a milhões de livros do catálogo do Google Books. Esta API permite 
-                  buscar livros por título, autor, categoria e muito mais, oferecendo uma 
-                  experiência rica e completa para os amantes da literatura.
-                </p>
-                
-                <div className={styles.features}>
-                  <h3><FaCode /> Funcionalidades da API:</h3>
-                  <div className={styles.featureGrid}>
-                    <div className={styles.featureItem}>
-                      <FaSearch className={styles.featureIcon} />
-                      <div>
-                        <strong>Busca Avançada</strong>
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                  <FaExternalLinkAlt className="text-blue-600" />
+                  Documentação Oficial
+                </h4>
+                <a 
+                  href="https://jsonplaceholder.typicode.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline text-sm"
+                >
+                  jsonplaceholder.typicode.com
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Endpoints Utilizados */}
+          <div className="bg-white rounded-2xl shadow-xl p-8">
+            <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+              <FaCode className="text-purple-600" />
+              Endpoints e Métodos HTTP
+            </h3>
+            
+            <div className="space-y-4">
+              <div className="border-l-4 border-green-500 pl-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-mono">GET</span>
+                  <code className="text-sm">/posts</code>
+                </div>
+                <p className="text-sm text-gray-600">Buscar todos os posts</p>
+              </div>
+              
+              <div className="border-l-4 border-green-500 pl-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-mono">GET</span>
+                  <code className="text-sm">/posts/:id</code>
+                </div>
+                <p className="text-sm text-gray-600">Buscar post específico</p>
+              </div>
+              
+              <div className="border-l-4 border-blue-500 pl-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-mono">POST</span>
+                  <code className="text-sm">/posts</code>
+                </div>
+                <p className="text-sm text-gray-600">Criar novo post</p>
+              </div>
+              
+              <div className="border-l-4 border-orange-500 pl-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-mono">PUT</span>
+                  <code className="text-sm">/posts/:id</code>
+                </div>
+                <p className="text-sm text-gray-600">Atualizar post completo</p>
+              </div>
+              
+              <div className="border-l-4 border-red-500 pl-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-mono">DELETE</span>
+                  <code className="text-sm">/posts/:id</code>
+                </div>
+                <p className="text-sm text-gray-600">Excluir post</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Atributos da Resposta */}
+          <div className="bg-white rounded-2xl shadow-xl p-8">
+            <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+              <FaList className="text-indigo-600" />
+              Atributos dos Posts
+            </h3>
+            
+            <div className="space-y-3">
+              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                <span className="font-mono text-sm text-purple-600">id</span>
+                <span className="text-sm text-gray-600">Identificador único (number)</span>
+              </div>
+              
+              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                <span className="font-mono text-sm text-purple-600">userId</span>
+                <span className="text-sm text-gray-600">ID do autor (number)</span>
+              </div>
+              
+              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                <span className="font-mono text-sm text-purple-600">title</span>
+                <span className="text-sm text-gray-600">Título do post (string)</span>
+              </div>
+              
+              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                <span className="font-mono text-sm text-purple-600">body</span>
+                <span className="text-sm text-gray-600">Conteúdo do post (string)</span>
+              </div>
+            </div>
+
+            <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+              <h4 className="font-semibold text-blue-800 mb-2">Exemplo de Resposta:</h4>
+              <pre className="text-xs text-blue-700 overflow-x-auto">
+{`{
+  "id": 1,
+  "userId": 1,
+  "title": "Exemplo de Post",
+  "body": "Conteúdo do post..."
+}`}
+              </pre>
+            </div>
+          </div>
+
+          {/* Funcionalidades Implementadas */}
+          <div className="bg-white rounded-2xl shadow-xl p-8 lg:col-span-2">
+            <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+              <FaBook className="text-green-600" />
+              Funcionalidades Implementadas no Projeto
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="bg-green-50 p-4 rounded-lg text-center">
+                <FaList className="text-green-600 text-2xl mx-auto mb-2" />
+                <h4 className="font-semibold text-green-800">Listagem</h4>
+                <p className="text-sm text-green-600 mt-1">Visualizar todos os posts</p>
+              </div>
+              
+              <div className="bg-blue-50 p-4 rounded-lg text-center">
+                <FaPlus className="text-blue-600 text-2xl mx-auto mb-2" />
+                <h4 className="font-semibold text-blue-800">Criação</h4>
+                <p className="text-sm text-blue-600 mt-1">Adicionar novos posts</p>
+              </div>
+              
+              <div className="bg-orange-50 p-4 rounded-lg text-center">
+                <FaEdit className="text-orange-600 text-2xl mx-auto mb-2" />
+                <h4 className="font-semibold text-orange-800">Edição</h4>
+                <p className="text-sm text-orange-600 mt-1">Modificar posts existentes</p>
+              </div>
+              
+              <div className="bg-red-50 p-4 rounded-lg text-center">
+                <FaTrash className="text-red-600 text-2xl mx-auto mb-2" />
+                <h4 className="font-semibold text-red-800">Exclusão</h4>
+                <p className="text-sm text-red-600 mt-1">Remover posts desnecessários</p>
+              </div>
+            </div>
+
+            <div className="mt-8 text-center">
+              <Link
+                href="/posts"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105"
+              >
+                <FaBook />
+                Explorar Posts
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
                         <p>Pesquise por título, autor, ISBN ou palavra-chave</p>
                       </div>
                     </div>
